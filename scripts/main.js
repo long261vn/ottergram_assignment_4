@@ -65,9 +65,27 @@ function addKeyPressHandler() {
     'use strict';
     document.body.addEventListener('keyup', function(event) {
         event.preventDefault();
-        console.log(event.keyCode);
+        //console.log(event.keyCode);
         if (event.keyCode === ESC_KEY) {
             hideDetails();
+        }
+    });
+}
+
+function addNumPressHandler() {
+    'use strict';
+    document.body.addEventListener('keyup', function(event) {
+        event.preventDefault();
+        //console.log(event.keyCode);
+        var thumbArray = getThumbnailsArray();
+        var keyCode = [49, 50, 51, 52, 53, 54, 55, 56, 57]; // numkey 1 to 9
+        //if (keyCode.includes(event.keyCode)) {
+        for (var i = 0; i < thumbArray.length; i++) {
+            var A = keyCode[i];
+            if (event.keyCode === A) {
+                setDetailsFromThumb(thumbArray[i]);
+                showDetails();
+            }
         }
     });
 }
@@ -77,6 +95,7 @@ function initializeEvents() {
     var thumbnails = getThumbnailsArray();
     thumbnails.forEach(addThumbClickHandler);
     addKeyPressHandler();
+    addNumPressHandler();
 }
 
 initializeEvents();
